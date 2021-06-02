@@ -1,7 +1,7 @@
 using { Country, managed } from '@sap/cds/common';
 using my.bookshop as bookshop from '../db/data-model';
 
-service CatalogService2 {
+service CatalogService {
 
   entity Books @readonly as projection on bookshop.Books;
   entity Authors @readonly as projection on  bookshop.Authors;
