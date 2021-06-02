@@ -31,10 +31,9 @@ This uses cds-bootstrap.js, which contains all needed bootstrap code, as also do
 ### Running the app 
 `node .\app.js` to boostrap the application with Express.
 ### Testing
-1. Test that custom express rest-services are working by typing in browse:
-`http://localhost:4004/logs` it should return values
+1. Test that custom express rest-services are working, opening url: `http://localhost:4004/logs` - it should return logs from DB
 1. Test that CDS-REST-Services are working fine by typing
-`http://localhost:4004/catalog-service2/Books?$top=11`  - it should return content of Books entity in DB
+`http://localhost:4004/catalog/Books?$top=11`  - it should return content of Books entity in DB
 1. You can open postman collection from and run POST to create a logs and GET to get those logs to see that the Express endpoints are working
 [postman collection](postman/api.postman_collection.json)
 
