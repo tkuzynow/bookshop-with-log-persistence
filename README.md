@@ -23,6 +23,36 @@ File or Folder | Purpose
 - (in VS Code simply choose _**Terminal** > Run Task > cds watch_)
 - Start adding content, for example, a [db/schema.cds](db/schema.cds).
 
+## Custom Bootstraping of CDS application with Express
+
+In order to bootstrap CDS within existing Express application (not having to start the app with `cds watch`), we prepared a file app.js, that contains all needed code to bootstrap CDS with express.  
+This uses cds-bootstrap.js, which contains all needed bootstrap code, as also documented in: https://cap.cloud.sap/docs/node.js/cds-server
+
+### Running the app 
+`node .\app.js` to boostrap the application with Express.
+### Testing
+1. Test that custom express rest-services are working by typing in browse:
+`http://localhost:4004/logs` it should return values
+1. Test that CDS-REST-Services are working fine by typing
+`http://localhost:4004/catalog-service2/Books?$top=11`  - it should return content of Books entity in DB
+1. You can open postman collection from and run POST to create a logs and GET to get those logs to see that the Express endpoints are working
+[postman collection](postman/api.postman_collection.json)
+
+
+## Custom REST services with CAP-persistence
+
+Custom REST services are implemented in the file [cat-service](cat-service.js)    
+There is a Express REST GET endpoint /logs that reads the Log entity from DB.  
+There is a Express REST POST endpoint to /logs that writes the Log entity in DB.  
+
+| Endpoint      | REST Method | Sample payload   | Comment |
+| :---        |    :----:   |          ---: |   ---:|
+| /logs      | POST       | {'tenantID':'testTenant', 'level':'D'} |Adds a log to the logs table with CDS persistence   |
+| /logs   | GET        | -  | gets logs using CDS persistence|
+| /catalog/Books?$top=11   | GET        | -  | consumes CDS OData REST service |
+
+Please note that the /logs endpoint is not registered as service within CDS service catalog 
+`cat-service.cds`, it's just a simple Express endpoint
 ## Testing DB log population using CAP-generated code
 
 1. open http://localhost:4004/catalog/Books
